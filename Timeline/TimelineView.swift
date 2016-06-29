@@ -146,7 +146,7 @@ public class TimelineView: UIView {
 	public init(bulletType: BulletType, timeFrames: [TimeFrame]){
 		self.timeFrames = timeFrames
 		self.bulletType = bulletType
-		super.init(frame: CGRect.zeroRect)
+		super.init(frame: CGRect.zero)
 		
 		translatesAutoresizingMaskIntoConstraints = false
 		
