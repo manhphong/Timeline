@@ -139,6 +139,7 @@
     UIView *view = [UIView new];
     [view setTranslatesAutoresizingMaskIntoConstraints:false];
     
+    // == Bullet ==
     CGSize size = CGSizeMake(14, 14);
     UIView *bullet = [self bulletView:size BulletType:self.bulletType];
     [view addSubview:bullet];
@@ -150,15 +151,19 @@
         [view addConstraint:[NSLayoutConstraint constraintWithItem:bullet attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:10]];
     }
     
+    // == Tile(Date) ==
+    
     UILabel *titleLabel = [UILabel new];
     [titleLabel setAllowsDefaultTighteningForTruncation:false];
     [titleLabel setFont:[UIFont fontWithName:@"ArialMT" size:20]];
-    [titleLabel setText:[NSString stringWithFormat:@"%@", timeFrame.date]];
+    NSString *dateString = [NSString stringWithFormat:@"%@", timeFrame.date];
+    NSLog(@"dateString : %@", dateString);
+    [titleLabel setText:dateString];
     [titleLabel setNumberOfLines:0];
     [titleLabel.layer setMasksToBounds:false];
     [view addSubview:titleLabel];
     [view addConstraints:@[
-                           [NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:40],
+                           [NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:-40],
                            [NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1.0 constant:-5],
      
      ]];
@@ -170,9 +175,11 @@
         titleLabel.textAlignment = NSTextAlignmentLeft;
     }
     
+    // == Text ==
+    
     UILabel *textLabel = [UILabel new];
     [textLabel setAllowsDefaultTighteningForTruncation:false];
-    [textLabel setFont:[UIFont fontWithName:@"ArialMT" size:20]];
+    [textLabel setFont:[UIFont fontWithName:@"ArialMT" size:16]];
     [textLabel setText:timeFrame.text];
     [textLabel setTextColor:self.detailLabelColor];
     [textLabel setNumberOfLines:0];
@@ -190,6 +197,8 @@
         [self addConstraint:[NSLayoutConstraint constraintWithItem:textLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:40]];
         textLabel.textAlignment = NSTextAlignmentLeft;
     }
+    
+    // == Image ==
     
     if (timeFrame.image) {
         UIView *backgroundViewForImage = [UIView new];
@@ -243,7 +252,7 @@
         [view addConstraint:[NSLayoutConstraint constraintWithItem:textLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-10]];
     }
     
-    //draw the line between the bullets
+    //  == draw the line between the bullets
     UIView *line = [UIView new];
     [line setTranslatesAutoresizingMaskIntoConstraints:false];
     [line setBackgroundColor:self.lineColor];
