@@ -23,7 +23,6 @@
 
 - (id)initWithBulletType:(BulletType)bulletType timeFrames:(NSArray<TimeFrame *> *)timeFrames
 {
-    self = [super initWithFrame:CGRectZero];
     self.lineColor = [UIColor lightGrayColor];
     self.titleLabelColor = [UIColor colorWithRed:0/255 green:180/255 blue:160/255 alpha:1];
     self.detailLabelColor = [UIColor colorWithRed:110/255 green:110/255 blue:110/255 alpha:1];
@@ -33,6 +32,7 @@
     {
         self.timeFrames = [timeFrames mutableCopy];
         self.bulletType = bulletType;
+        self = [super initWithFrame:CGRectZero];
         [self setTranslatesAutoresizingMaskIntoConstraints:false];
         [self setupContent];
     }
@@ -53,7 +53,7 @@
         [v removeFromSuperview];
     }
     
-    UIView *guideView = [[UIView alloc] init];
+    UIView *guideView = [UIView new];
     [guideView setTranslatesAutoresizingMaskIntoConstraints:false];
     [self addSubview:guideView];
     
@@ -88,7 +88,6 @@
     UIView *line = [[UIView alloc] init];
     [line setTranslatesAutoresizingMaskIntoConstraints:false];
     [line setBackgroundColor:self.lineColor];
-    
     [self addSubview:line];
     [self sendSubviewToBack:line];
     [self addConstraints:@[
@@ -140,6 +139,7 @@
     [view setTranslatesAutoresizingMaskIntoConstraints:false];
     
     // == Bullet ==
+    
     CGSize size = CGSizeMake(14, 14);
     UIView *bullet = [self bulletView:size BulletType:self.bulletType];
     [view addSubview:bullet];
@@ -161,6 +161,7 @@
     [titleLabel setText:dateString];
     [titleLabel setNumberOfLines:0];
     [titleLabel.layer setMasksToBounds:false];
+//    [titleLabel sizeToFit];
     [view addSubview:titleLabel];
     [view addConstraints:@[
                            [NSLayoutConstraint constraintWithItem:titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:-40],
@@ -184,6 +185,7 @@
     [textLabel setTextColor:self.detailLabelColor];
     [textLabel setNumberOfLines:0];
     [textLabel.layer setMasksToBounds:false];
+    [textLabel sizeToFit];
     [view addSubview:textLabel];
     [view addConstraints:@[
                            [NSLayoutConstraint constraintWithItem:textLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:-40],
