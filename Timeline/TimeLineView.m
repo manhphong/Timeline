@@ -252,6 +252,9 @@
         [view addConstraint:[NSLayoutConstraint constraintWithItem:textLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-40]];
     }
     
+    [view setBackgroundColor:[UIColor grayColor]];
+    [textLabel setBackgroundColor:[UIColor yellowColor]];
+    
     //  == draw the line between the bullets
     UIView *line = [UIView new];
     [line setTranslatesAutoresizingMaskIntoConstraints:false];
