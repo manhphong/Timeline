@@ -355,7 +355,7 @@
 
 @implementation TimeFrame
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date image:(UIImage *)image
+- (id)initWithText:(NSString *)text dateTime:(NSDate *)date avatar:(UIImage *)image status:(EventStatus)status
 {
     self = [super init];
     if (self)
@@ -363,6 +363,7 @@
         self.text = text;
         self.date = date;
         self.image = image;
+        self.status = status;
     }
     return self;
 }

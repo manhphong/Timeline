@@ -11,13 +11,21 @@
 
 @interface TimeFrame : NSObject
 
+typedef enum {
+    Pending,
+    Rejected,
+    Accepted,
+} EventStatus;
+
 @property (nonatomic, strong) NSString *text;
 
 @property (nonatomic, strong) NSDate *date;
 
 @property (nonatomic, strong) UIImage *image;
 
-- (id)initWithText:(NSString *)text date:(NSDate *)date image:(UIImage *)image;
+@property (nonatomic, assign) EventStatus status;
+
+- (id)initWithText:(NSString *)text dateTime:(NSDate *)date avatar:(UIImage *)image status:(EventStatus)status;
 
 @end
 
